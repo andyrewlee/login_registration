@@ -1,10 +1,7 @@
 <?php
-
 session_start();
 require_once("connection.php");
-
 ?>
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,10 +15,10 @@ require_once("connection.php");
         $result = mysqli_query($connection, $sql);
         $row = mysqli_fetch_assoc($result);
         if(isset($_SESSION['user_id']) && $_SESSION['user_id'] == $_GET['id'])
-        {  ?>
+        { ?>
             <div id="header">
                 <h1>Welcome <?= $row["first_name"] ?>!</h1>
-                <a href="process.php?logout=<?= $_SESSION["user_id"]  ?>">Log Out</a>
+                <a href="process.php?logout=<?= $_SESSION["user_id"] ?>">Log Out</a>
             </div>
             <div id="main-content">
                 <h2>Profile Information</h2>
@@ -30,8 +27,7 @@ require_once("connection.php");
                 <p><?= $row["email"] ?></p>
                 <p><?= date('M d, Y', strtotime($row["birthday"])) ?></p>
             </div>
-<?php
-        }  ?>
+<?php   } ?>
         </div>
     </body>
 </html>

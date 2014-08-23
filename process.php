@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 require_once("connection.php");
 
@@ -147,10 +146,8 @@ function register_user($connection, $post)
         mysqli_query($connection, $sql);
         $user_id = mysqli_insert_id($connection);
         $_SESSION['user_id'] = $user_id;
-
         header('Location: profile.php?id=' . $user_id);
         exit;
     }
 }
-
 ?>
