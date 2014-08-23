@@ -102,8 +102,12 @@ function register_user($connection, $post)
             }
             else
             {
-                $exploded_date = explode("/", $value);
-                if(!checkdate($exploded_date[0], $exploded_date[1], $exploded_date[2]))
+                $exploded_date = explode("-", $value);
+                // $exploded_date = explode("/", $value);
+                // var_dump($exploded_date);
+                // die();
+                if(!checkdate($exploded_date[1], $exploded_date[2], $exploded_date[0]))
+                // if(!checkdate($exploded_date[0], $exploded_date[1], $exploded_date[2]))
                 {
                     $_SESSION["errors"][] = "Please enter valid birthday";
                 }
@@ -142,7 +146,8 @@ function register_user($connection, $post)
         $_SESSION["success_message"] = "Congratulations you are now a member!";
         $salt = bin2hex(openssl_random_pseudo_bytes(22));
         $hash = crypt($post['password'], $salt);
-        $sql = "INSERT INTO users (first_name, last_name, email, birthday, password, created_at, updated_at) VALUES('".$post["first_name"]."', '".$post["last_name"]."', '".$post["email"]."', '".$exploded_date[2].'-'.$exploded_date[0].'-'.$exploded_date[1]."', '".$hash."', NOW(), NOW())";
+        $sql = "INSERT INTO users (first_name, last_name, email, birthday, password, created_at, updated_at) VALUES('".$post["first_name"]."', '".$post["last_name"]."', '".$post["email"]."', '".$exploded_date[0].'-'.$exploded_date[1].'-'.$exploded_date[2]."', '".$hash."', NOW(), NOW())"; 
+        // $sql = "INSERT INTO users (first_name, last_name, email, birthday, password, created_at, updated_at) VALUES('".$post["first_name"]."', '".$post["last_name"]."', '".$post["email"]."', '".$exploded_date[2].'-'.$exploded_date[0].'-'.$exploded_date[1]."', '".$hash."', NOW(), NOW())";
         mysqli_query($connection, $sql);
         $user_id = mysqli_insert_id($connection);
         $_SESSION['user_id'] = $user_id;

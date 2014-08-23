@@ -23,6 +23,10 @@ form {
     text-align: center;
 }
 
+form p input{
+    width: 138px;
+}
+
 p.error {
     color: red;
     margin: 0;

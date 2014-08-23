@@ -67,3 +67,6 @@ require_once("connection.php");
         </div>
     </body>
 </html>
+<?php
+$_SESSION = array();
+?>

@@ -12,6 +12,14 @@ if ($connection->connect_errno)
 {
     die("Failed to connect to MySQL: (" . $connection->connect_errno . ") " . $connection->connect_error);
 }
+//use when expecting a single result
+function fetch_record($query)
+{
+    global $connection;
+    $result = $connection->query($query);
+    return mysqli_fetch_assoc($result);
+    //return $result->fetch_assoc();
+}
 //used when expecting multiple results
 function fetch_all($query)
 {
@@ -26,22 +34,14 @@ function fetch_all($query)
     }
     return $data;
 }
-//use when expecting a single result
-function fetch_record($query)
-{
-    global $connection;
-    $result = $connection->query($query);
-    return mysqli_fetch_assoc($result);
-    //return $result->fetch_assoc();
-}
 //use to run INSERT/DELETE/UPDATE, queries that don't return a value
 //notice this function returns a value.  This value will be equal to the ID of the most recent query item
 //ran by your PHP code.
 function run_mysql_query($query)
 {
     global $connection;
-     $result = $connection->query($query);
-     return $connection->insert_id;
+    $result = $connection->query($query);
+    return $connection->insert_id;
 }
 //This function will return an escaped string.  IE the string "That's crazy!" Will be returned as:
 // "That\'s crazy!...This helps secure your database!
