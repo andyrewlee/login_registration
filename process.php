@@ -102,7 +102,7 @@ function register_user($connection, $post)
             }
             else
             {
-                $exploded_date = explode("-", $value);
+                $exploded_date = explode("-", escape_this_string($value));
                 // $exploded_date = explode("/", $value);
                 // var_dump($exploded_date);
                 // die();
@@ -146,6 +146,9 @@ function register_user($connection, $post)
         $_SESSION["success_message"] = "Congratulations you are now a member!";
         $salt = bin2hex(openssl_random_pseudo_bytes(22));
         $hash = crypt($post['password'], $salt);
+        // modifying $sql to use escape_this_string() function to prevent MySQL injection
+
+
         $sql = "INSERT INTO users (first_name, last_name, email, birthday, password, created_at, updated_at) VALUES('".$post["first_name"]."', '".$post["last_name"]."', '".$post["email"]."', '".$exploded_date[0].'-'.$exploded_date[1].'-'.$exploded_date[2]."', '".$hash."', NOW(), NOW())"; 
         // $sql = "INSERT INTO users (first_name, last_name, email, birthday, password, created_at, updated_at) VALUES('".$post["first_name"]."', '".$post["last_name"]."', '".$post["email"]."', '".$exploded_date[2].'-'.$exploded_date[0].'-'.$exploded_date[1]."', '".$hash."', NOW(), NOW())";
         mysqli_query($connection, $sql);
