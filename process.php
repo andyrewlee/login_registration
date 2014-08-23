@@ -144,9 +144,9 @@ function register_user($connection, $post)
     else
     {
         $_SESSION["success_message"] = "Congratulations you are now a member!";
-        $esc_first_name=escape_this_string($post['first_name']);
-        $esc_last_name=escape_this_string($post['last_name']);
-        $esc_email=escape_this_string($post['email']);
+        $esc_first_name=htmlentities(escape_this_string($post['first_name']));
+        $esc_last_name=htmlentities(escape_this_string($post['last_name']));
+        $esc_email=htmlentities(escape_this_string($post['email']));
         $esc_password=escape_this_string($post['password']);
         $salt = bin2hex(openssl_random_pseudo_bytes(22));
         $hash = crypt($esc_password, $salt);
