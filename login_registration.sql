@@ -35,7 +35,7 @@ CREATE TABLE `users` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Rory','Pasley','p@gm.com','0000-00-00','a2MEKOIcmCijA','2014-08-23 12:00:49','2014-08-23 12:00:49'),(2,'Timmy','Smith','ts@gmail.com','2010-01-31','10xCP/g3c1sQc','2014-08-23 12:07:15','2014-08-23 12:07:15');
+INSERT INTO `users` VALUES (23,'aksdfhaouisdf\"\'<script>alert(\'hello\')</script>','aklsdjfoiahsdoifnasdf','erwer@gmail.com','2013-12-31','10xCP/g3c1sQc','2014-08-23 13:47:16','2014-08-23 13:47:16'),(24,'crockett','tubbs','ct@gmail.com','2013-12-29','8edwuqwDDnTIw','2014-08-23 14:29:07','2014-08-23 14:29:07');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-23 12:36:23
+-- Dump completed on 2014-08-23 14:30:15

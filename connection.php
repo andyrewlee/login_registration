@@ -47,6 +47,7 @@ function run_mysql_query($query)
 // "That\'s crazy!...This helps secure your database!
 function escape_this_string($string)
 {
+    // echo 'in escape_this_string';
     global $connection;
     return $connection->real_escape_string($string);
 }   

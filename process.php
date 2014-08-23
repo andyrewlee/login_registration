@@ -144,12 +144,16 @@ function register_user($connection, $post)
     else
     {
         $_SESSION["success_message"] = "Congratulations you are now a member!";
+        $esc_first_name=escape_this_string($post['first_name']);
+        $esc_last_name=escape_this_string($post['last_name']);
+        $esc_email=escape_this_string($post['email']);
+        $esc_password=escape_this_string($post['password']);
         $salt = bin2hex(openssl_random_pseudo_bytes(22));
-        $hash = crypt($post['password'], $salt);
+        $hash = crypt($esc_password, $salt);
         // modifying $sql to use escape_this_string() function to prevent MySQL injection
+        $sql = "INSERT INTO users (first_name, last_name, email, birthday, password, created_at, updated_at) VALUES('{$esc_first_name}', '{$esc_last_name}', '{$esc_email}', '".$exploded_date[0].'-'.$exploded_date[1].'-'.$exploded_date[2]."', '".$hash."', NOW(), NOW())"; 
 
-
-        $sql = "INSERT INTO users (first_name, last_name, email, birthday, password, created_at, updated_at) VALUES('".$post["first_name"]."', '".$post["last_name"]."', '".$post["email"]."', '".$exploded_date[0].'-'.$exploded_date[1].'-'.$exploded_date[2]."', '".$hash."', NOW(), NOW())"; 
+        // $sql = "INSERT INTO users (first_name, last_name, email, birthday, password, created_at, updated_at) VALUES('".$post["first_name"]."', '".$post["last_name"]."', '".$post["email"]."', '".$exploded_date[0].'-'.$exploded_date[1].'-'.$exploded_date[2]."', '".$hash."', NOW(), NOW())"; 
         // $sql = "INSERT INTO users (first_name, last_name, email, birthday, password, created_at, updated_at) VALUES('".$post["first_name"]."', '".$post["last_name"]."', '".$post["email"]."', '".$exploded_date[2].'-'.$exploded_date[0].'-'.$exploded_date[1]."', '".$hash."', NOW(), NOW())";
         mysqli_query($connection, $sql);
         $user_id = mysqli_insert_id($connection);
